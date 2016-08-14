@@ -38,6 +38,7 @@
 	    <label for="password" class="col-sm-4 control-label">New Password:</label>
 	    <div class="col-sm-8">
 		  <input type='password' autocomplete="off" name='password' id='password' maxlength="50" required placeholder="Password" class="form-control"/>
+		  <p id="passwordStrengthIndicator"></p>
 	    </div>
 	 </div>
 	

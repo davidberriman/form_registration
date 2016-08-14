@@ -64,7 +64,12 @@ function showPasswordStrengthInkdicator(){
 		
 	var indicator = $('#passwordStrengthIndicator');
 	
-	indicator.html("&nbsp;" + strengthCheck.text);
+	if(typeof pass1 == "undefined" || pass1 == ""){
+		indicator.html("");
+	}else{
+		indicator.html("&nbsp;" + strengthCheck.text);
+	}
+	
 	indicator.css('background-color', strengthCheck.backgroundColor);
 	indicator.css('color', strengthCheck.textColor);
 }
@@ -253,9 +258,9 @@ function returnPasswordColour(type, score){
 		colors[0] = "#ff0000";
 		colors[1] = "#FB1919";
 		colors[2] = "#ff5f5f";
-		colors[3] = "#56e500";
-		colors[4] = "#4dcd00";
-		colors[5] = "#399800";
+		colors[3] = "#E5CA00";
+		colors[4] = "#A7E500";
+		colors[5] = "#4dcd00";
 		return colors[score];
 	}
 	
@@ -266,7 +271,7 @@ function returnPasswordColour(type, score){
 		textColor[2] = "#ffffff";
 		textColor[3] = "#000000";
 		textColor[4] = "#000000";
-		textColor[5] = "#ffffff";
+		textColor[5] = "#000000";
 		return textColor[score];
 	}	
 }
