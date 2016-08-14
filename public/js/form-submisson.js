@@ -16,29 +16,58 @@ $( document ).ready(function()
 	   event.preventDefault();
        submitMe();
    	}); 
+	
+	// show user a password strength indicatorx
+	var passwordInput = $( "#password" );
 
+	passwordInput.keyup(function() {
+	   showPasswordStrengthInkdicator();
+ 	});
+
+	passwordInput.focusout(function() {
+	   showPasswordStrengthInkdicator();
+ 	});
+	
+	var passwordConfirmInput = $( "#passwordConfirm" );
+	
 	// call the displayPasswordVerification to 
 	// show tick / cross to say if passwords
 	// are the same
-	$( "#passwordConfirm" ).keyup(function() {
+	passwordConfirmInput.keyup(function() {
 	   displayPasswordVerification();
  	});
 
-	$( "#passwordConfirm" ).focusout(function() {
+	passwordConfirmInput.focusout(function() {
 	   displayPasswordVerification();
  	});
   
+  	var passwordCheckerInput = $( "#passChecker" );
+  
 	// hide password confirm tick / cross until field gets focus
-	$('#passChecker').css('display', 'none');
+	passwordCheckerInput.css('display', 'none');
 
 	// show password confirm cross when field gets focus
-	$('#passwordConfirm').focus(function(){
-		$('#passChecker').css('display', 'block');
-		$('#passChecker').css('color', 'red');  
+	passwordConfirmInput.focus(function(){
+		passwordCheckerInput.css('display', 'block');
+		passwordCheckerInput.css('color', 'red');  
 	});
 
 });
 
+
+// -----------------------------------------
+//  Show user how strong their password is
+// -----------------------------------------
+function showPasswordStrengthInkdicator(){
+	var pass1 = $("#password").val();	
+	var strengthCheck = passwordStrengthCheck(pass1);
+		
+	var indicator = $('#passwordStrengthIndicator');
+	
+	indicator.html("&nbsp;" + strengthCheck.text);
+	indicator.css('background-color', strengthCheck.backgroundColor);
+	indicator.css('color', strengthCheck.textColor);
+}
 
 
 // -----------------------------------------
@@ -69,12 +98,14 @@ function displayPasswordVerification(){
 // -----------------------------------------
 function isPasswordValid(valid){
 	
+	var passChecker = $('#passChecker');
+	
 	if(valid){
-		$('#passChecker').html('&#x2714;');
-		$('#passChecker').css('color', 'green');
+		passChecker.html('&#x2714;');
+		passChecker.css('color', 'green');
 	}else{
-	  $('#passChecker').css('color', 'red');
-	  $('#passChecker').html('&#x2718;');
+	    passChecker.css('color', 'red');
+	    passChecker.html('&#x2718;');
 	}
 }
 
@@ -175,8 +206,10 @@ function submitMe(){
 // shows an error box with error message
 // -----------------------------------------
 function showErroDiv(message, errorFields){
-	$("#errorBox-js").html(message);
-	$("#errorBox-js").css("display", "block");
+	
+	var errorBox = $("#errorBox-js");
+	errorBox.html(message);
+	errorBox.css("display", "block");
 		
 	if(typeof errorFields != "undefined"){
 		// loop through the errorFields array and
@@ -198,10 +231,76 @@ function showErroDiv(message, errorFields){
 // removes the error box 
 // -----------------------------------------
 function hideErroDiv(){
-	$("#errorBox-js").val("");
-	$("#errorBox-js").css("display", "none");
-	$(".form-group").css( "border", "none" );
-	$(".form-group").css( "padding", "0" );
+	
+	var errorBox = $("#errorBox-js");
+	var formGroup = $(".form-group");
+	
+	errorBox.val("");
+	errorBox.css("display", "none");
+	formGroup.css( "border", "none" );
+	formGroup.css( "padding", "0" );
 }
 
+
+
+// -----------------------------------------
+// return colours for password indicator
+// -----------------------------------------
+function returnPasswordColour(type, score){
+	
+	if(type == "background"){
+		var colors = new Array();
+		colors[0] = "#ff0000";
+		colors[1] = "#FB1919";
+		colors[2] = "#ff5f5f";
+		colors[3] = "#56e500";
+		colors[4] = "#4dcd00";
+		colors[5] = "#399800";
+		return colors[score];
+	}
+	
+	if(type == "text"){
+		var textColor = new Array();
+		textColor[0] = "#ffffff";
+		textColor[1] = "#ffffff";
+		textColor[2] = "#ffffff";
+		textColor[3] = "#000000";
+		textColor[4] = "#000000";
+		textColor[5] = "#ffffff";
+		return textColor[score];
+	}	
+}
+
+// -----------------------------------------
+// Check password stringth 
+// -----------------------------------------
+function passwordStrengthCheck(password)
+{
+	var score   = 0;
+
+	if (password.length > 6) {score++;}
+
+	if ( ( password.match(/[a-z]/) ) && 
+	     ( password.match(/[A-Z]/) ) ) {score++;}
+
+	if (password.match(/\d+/)){ score++;}
+
+	if ( password.match(/[^a-z\d]+/) )	{score++};
+
+	if (password.length > 12){ score++;}
+	
+	var desc='';
+	if(password.length < 1){desc='';}
+	else if(score<3){ desc = "WEAK"; }
+	else if(score<4){ desc = "MEDIUM"; }
+	else if(score==4){ desc= "GOOD"; }
+	else if(score>4){ desc= "STRONG"; }
+	
+	var backgroundColor = returnPasswordColour("background", score);
+	var textColor = returnPasswordColour("text", score);
+	
+	var passwordResult = { "backgroundColor" : backgroundColor, "text" : desc , "textColor" : textColor };
+	
+	return passwordResult;
+}
 

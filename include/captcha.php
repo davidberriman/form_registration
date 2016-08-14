@@ -22,8 +22,8 @@
  
  // using a mixture of TTF fonts 
  $fonts = array(); 
- $fonts[] = "../fonts/COUTURE-Bold.ttf"; 
- $fonts[] = "../fonts/estre.ttf"; 
+ $fonts[] = "../public/fonts/COUTURE-Bold.ttf"; 
+ $fonts[] = "../public/fonts/estre.ttf"; 
  
  // add random digits to canvas using random black/white colour 
  $digit = ''; 

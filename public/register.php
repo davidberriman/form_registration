@@ -58,6 +58,7 @@
     <label for='password' class="col-sm-4 control-label">Password:</label>
 	<div class="col-sm-8">
     <input type='password' name='password' id='password' maxlength="50" required placeholder="Password" class="form-control"/>
+	<p id="passwordStrengthIndicator"></p>
 	</div>
 </div>
 
@@ -72,7 +73,7 @@
 <div class="form-group">
     <label for='password' class="col-sm-4 control-label">Copy Digits:</label>
 	<div class="col-sm-8">
-	<img src="include/captcha.php" border="1" id="captcha" alt="CAPTCHA"><br />
+	<img src="../include/captcha.php" id="captcha" alt="CAPTCHA"><br />
     <input type='text' name='captcha' id='captchaText' maxlength="10" required  class="form-control"/>
 	<p class="small-text">Copy the digits from the image above</p>
 	</div>

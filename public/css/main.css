@@ -118,6 +118,11 @@
 	top: 5px;
 	right: 25px;
 }
+#passwordStrengthIndicator{
+	font-size: 10px;
+	font-weight:400;
+	margin: 0px;
+}
 
 /* spam_trap: This input is hidden. This is here to trick the spam bots*/
 .hidnSpmTp
