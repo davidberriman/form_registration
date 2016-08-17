@@ -74,6 +74,14 @@ class ErrorLog extends MySQLDatabase
 			return;
 		}
 		
+		// try to make a log file if it doesn't exist
+		if(mkdir(LIB_PATH.DS."logs", 0777, true)) {
+			if(fopen(ERROR_LOG_DIR, "w")){
+				error_log($error, 3, ERROR_LOG_DIR, "");
+				return;
+			}
+		}
+		
 		error_log($error,0, "", "");
 	}
 	
