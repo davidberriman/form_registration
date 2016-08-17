@@ -3,11 +3,11 @@
 // (\ for Windows, / for Unix)
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
-$scriptFolder = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-$scriptFolder .= $_SERVER['HTTP_HOST'];
-
-// define the site root
-defined('SITE_ROOT') ? null : define('SITE_ROOT', $scriptFolder.DS.'RegistrationForm_git');
+/*********** Need to change site root!! **************/
+// on a mac it would be something like:
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'xxxx'.DS.'Sites'.DS.'RegistrationForm');
+// on a server it might be something like:
+// defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'home'.DS.'my_acccont_name'.DS);
 
 defined('LIB_PATH') ? null : define('LIB_PATH', SITE_ROOT.DS.'include');
 

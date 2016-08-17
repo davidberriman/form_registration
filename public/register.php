@@ -74,7 +74,7 @@
     <label for='password' class="col-sm-4 control-label">Copy Digits:</label>
 	<div class="col-sm-8">
 	<img src="../include/captcha.php" id="captcha" alt="CAPTCHA"><br />
-    <input type='text' name='captcha' id='captchaText' maxlength="10" required  class="form-control"/>
+    <input type='text' name='captcha' id='captchaText' maxlength="10" required  class="form-control" placeholder="Copy Digits"/>
 	<p class="small-text">Copy the digits from the image above</p>
 	</div>
 </div>
