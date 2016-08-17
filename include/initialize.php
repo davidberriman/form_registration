@@ -5,7 +5,7 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 /*********** Need to change site root!! **************/
 // on a mac it would be something like:
-defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'xxxx'.DS.'Sites'.DS.'RegistrationForm');
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'davidberriman'.DS.'Sites'.DS.'RegistrationForm');
 // on a server it might be something like:
 // defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'home'.DS.'my_acccont_name'.DS);
 
