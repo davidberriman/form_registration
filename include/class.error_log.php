@@ -73,7 +73,7 @@ class ErrorLog extends MySQLDatabase
 			error_log($error, 3, ERROR_LOG_DIR, "");
 			return;
 		}
-				
+		
 		error_log($error,0, "", "");
 	}
 	

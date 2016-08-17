@@ -207,6 +207,22 @@ class Login extends MySQLDatabase
 	// --------------------------------------------------------------------------
 	public function get_user_for_field_with_value($field, $value){
 		
+		try
+		{ 
+			return $this->get_user_for_field_with_value_private($field, $value);
+		}
+		catch (Exception $e){
+			
+			$log = new ErrorLog();
+			$log->createErrorLog($e);
+			return false;		
+		}
+	}
+	
+	
+	
+	private function get_user_for_field_with_value_private($field, $value){
+		
 		global $database;
 		
 		$sanitize = new Sanitize();
@@ -223,17 +239,20 @@ class Login extends MySQLDatabase
 			
 			$stmt->bind_param('s', $cleanValue);
 			if ( false===$stmt) {
-			 	throw new Exception("Exception thrown (Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
+			 	throw new Exception("Exception thrown bind_param(Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
 			}
 			
 			$stmt->execute();
 			if ($stmt->errno) {
-				throw new Exception("Exception thrown (Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
+				throw new Exception("Exception thrown execute(Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
 			}
 
 		    $stmt->store_result();
 	
 		    $stmt->bind_result($id, $forename, $surname, $email, $password, $resetpassword, $confirmcode, $registrationStart, $membershipStart);
+			if ($stmt->errno) {
+				throw new Exception("Exception thrown bind_result(Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);		
+			}
 			
 			$num_of_rows = $stmt->num_rows;
 						
@@ -266,6 +285,24 @@ class Login extends MySQLDatabase
 	// --------------------------------------------------------------------------
 	public function get_user_for_field_and_field_with_value($field, $value, $field2, $value2){
 		
+		try
+		{ 
+			return $this->get_user_for_field_and_field_with_value_private($field, $value, $field2, $value2);
+		}
+		catch (Exception $e){
+			
+			$log = new ErrorLog();
+			$log->createErrorLog($e);
+			return false;		
+		}
+	}
+	
+	
+	// --------------------------------------------------------------------------
+	// This could be called using the confirmcode / email as the retrieve profile
+	// --------------------------------------------------------------------------
+	private function get_user_for_field_and_field_with_value_private($field, $value, $field2, $value2){
+		
 		global $database;
 		
 		$sanitize = new Sanitize();
@@ -282,18 +319,21 @@ class Login extends MySQLDatabase
 		if ($stmt = $database->get_connection()->prepare($sql)) {
 			
 			$stmt->bind_param('ss', $cleanValue, $cleanValue2);
-			if ( false===$stmt) {
-			 	throw new Exception("Exception thrown (Login:get_user_for_field_and_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
+			if (false===$stmt) {
+			 	throw new Exception("Exception thrown bind_param(Login:get_user_for_field_and_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
 			}
 			
 			$stmt->execute();
 			if ($stmt->errno) {
-				throw new Exception("Exception thrown (Login:get_user_for_field_and_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
+				throw new Exception("Exception thrown execute(Login:get_user_for_field_and_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
 			}
 
 		    $stmt->store_result();
 	
 		    $stmt->bind_result($id, $forename, $surname, $email, $password, $resetpassword, $confirmcode, $registrationStart, $membershipStart);
+			if ($stmt->errno) {
+				throw new Exception("Exception thrown bind_result(Login:get_user_for_field_with_value) Error logged as: ".$stmt->error ,E_ALL);
+			}
 			
 			$num_of_rows = $stmt->num_rows;
 						

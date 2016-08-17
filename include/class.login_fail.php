@@ -187,6 +187,25 @@ class LoginFails extends MySQLDatabase
 	// --------------------------------------------------------------------------
 	public function get_user_for_field_with_value($field, $value){
 		
+		try
+		{ 
+			return $this->get_user_for_field_with_value_private($field, $value);
+		}
+		catch (Exception $e){
+			
+			$log = new ErrorLog();
+			$log->createErrorLog($e);
+			return false;		
+		}
+	}
+	
+	
+	
+	// --------------------------------------------------------------------------
+	// This could be called using the confirmcode / email as the retrieve profile
+	// --------------------------------------------------------------------------
+	private function get_user_for_field_with_value_private($field, $value){
+		
 		global $database;
 						
 		$sql  = "SELECT username, login_count, last_time, address FROM ". self::$table_name ." WHERE {$field} = ?  ";
