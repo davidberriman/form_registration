@@ -22,7 +22,7 @@ resetpassword VARCHAR( 80 ) DEFAULT NULL ,
 confirmcode VARCHAR(32) NOT NULL,
 registrationStart datetime DEFAULT NULL ,
 membershipStart datetime DEFAULT NULL ,
-PRIMARY KEY ( id_user )) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+PRIMARY KEY ( id )) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
