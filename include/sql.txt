@@ -8,29 +8,29 @@ create user RegForm_user;
 
 grant all on RegistrationForm.* to 'RegForm_user'@'localhost' identified by '@RegistrationForm12passWrd';
 
+use RegistrationForm
   
-  
-*** create tables *******
+# *************** create tables *****************
 
-Create Table login (
-id INT NOT NULL AUTO_INCREMENT ,
-forename VARCHAR( 64 ) NOT NULL ,
-surname VARCHAR( 64 ) NOT NULL ,
-email VARCHAR( 64 ) NOT NULL ,
-password VARCHAR( 80 ) NOT NULL ,
-resetpassword VARCHAR( 80 ) DEFAULT NULL ,
-confirmcode VARCHAR(32) NOT NULL,
-registrationStart datetime DEFAULT NULL ,
-membershipStart datetime DEFAULT NULL ,
-PRIMARY KEY ( id )) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+Create Table `login` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `forename` VARCHAR( 64 ) NOT NULL ,
+  `surname` VARCHAR( 64 ) NOT NULL ,
+  `email` VARCHAR( 64 ) NOT NULL ,
+  `password` VARCHAR( 80 ) NOT NULL ,
+  `resetpassword` VARCHAR( 80 ) DEFAULT NULL ,
+  `confirmcode` VARCHAR(32) NOT NULL,
+  `registrationStart` DATETIME DEFAULT NULL ,
+  `membershipStart` DATETIME DEFAULT NULL ,
+  PRIMARY KEY ( id )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `failed_logins` (
-  `username` varchar(64) NOT NULL,
-  `login_count` int(2) DEFAULT NULL,
-  `last_time` int(11) DEFAULT NULL,
-  `address` varchar(64) NOT NULL,
+  `username` VARCHAR(64) NOT NULL,
+  `login_count` INT(2) DEFAULT NULL,
+  `last_time` INT(11) DEFAULT NULL,
+  `address` VARCHAR(64) NOT NULL,
   PRIMARY KEY ( username )
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -38,10 +38,10 @@ CREATE TABLE `failed_logins` (
 
 CREATE TABLE `errorLogs` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `email` varchar(64) DEFAULT NULL,
-  `errorlog` mediumtext,
-  `errornumber` varchar(20) DEFAULT NULL,
-  `errorDateTime` datetime DEFAULT NULL ,
+  `email` VARCHAR(64) DEFAULT NULL,
+  `errorlog` MEDIUMTEXT,
+  `errornumber` VARCHAR(20) DEFAULT NULL,
+  `errorDateTime` DATETIME DEFAULT NULL ,
   PRIMARY KEY ( id )
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

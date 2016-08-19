@@ -27,15 +27,24 @@
  
  // add random digits to canvas using random black/white colour 
  $digit = ''; 
+ $digitArray = "";
  for($x = 10; $x <= 130; $x += 30) 
  { 
  $textcolor = (rand() % 2) ? $textcolor1 : $textcolor2; 
- $digit .= ($num = rand(0, 9)); 
+ $digit = ($num = rand(0, 9)); 
+
+ // stop 1 or 7 because they look too similar 
+ while($digit == 1 || $digit == 7){
+ 	$digit = ($num = rand(0, 9)); 
+ }
+ 
+ $digitArray .= $digit;
+ 
  imagettftext($image, 20, rand(-30,30), $x, rand(20, 42), $textcolor, $fonts[array_rand($fonts)], $num); 
  } 
  
  // record digits in session variable 
- $_SESSION['digit'] = $digit; 
+ $_SESSION['digit'] =  $digitArray; 
  
  // display image and clean up 
  header('Content-type: image/png');
